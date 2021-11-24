@@ -1,0 +1,28 @@
+1. Should return the total coins = owners coins
+	expected : totalsupply = owners coins
+	result   : pass
+
+2. Should transfer coins correctly
+	expected : owner's balance : 990
+		   receiver's balance :10
+	result   : pass
+
+3. Deploy the token smart contract 
+	expexted : deploy without errors
+	result   : pass
+
+4. Should set the right owner
+	expected : should set msg.sender as the owner
+	result   : pass
+
+5. Should transfer tokens between accounts
+	expected : token must be transferable
+	result   : pass
+
+6. Should fail if sender doesn’t have enough tokens
+	expected : must fail if user is trasferring more than its current balance
+	result   : fail
+
+7. Should update balances after transfers
+	expected : should update the balance after the transfer
+	result	 : pass
