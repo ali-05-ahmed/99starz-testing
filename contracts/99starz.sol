@@ -309,8 +309,20 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
      * - `spender` cannot be the zero address.
      */
     function approve(address spender, uint256 amount) public virtual override returns (bool) {
-        _approve(_msgSender(), spender, amount);
-        return true;
+         uint256 currentAllowance = _allowances[_msgSender()][spender];
+         if(currentAllowance == amount){
+            return true;
+         }
+         else if(amount > currentAllowance) {
+            amount =  amount - currentAllowance ;
+            increaseAllowance(spender, amount);
+            return true;
+         }
+         else{
+             amount = currentAllowance - amount;
+             decreaseAllowance(spender, amount);
+             return true;
+         }    
     }
 
     /**

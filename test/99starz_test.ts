@@ -153,6 +153,47 @@ describe("Token contract", function () {
             const addr2Balance = await hardhatToken.balanceOf(addr2.address);
             expect(addr2Balance).to.equal(50);
         });
+
+        it("Should update Allowance of address 2", async function () {
+            const initialOwnerBalance: BigNumber = await hardhatToken.balanceOf(owner.address);
+
+            // Approve 50 tokens from owner to addr2.
+            await hardhatToken.approve(addr2.address, 50);
+
+            // Check balances.
+            const addr2Allowance = await hardhatToken.allowance(owner.address, addr2.address);
+            expect(addr2Allowance).to.equal(50);
+        });
+        it("Should increase Allowance of address 2", async function () {
+            const initialOwnerBalance: BigNumber = await hardhatToken.balanceOf(owner.address);
+
+            // Approve 50 tokens from owner to addr2.
+            await hardhatToken.approve(addr2.address, 60);
+
+            // Check balances.
+            const addr2Allowance = await hardhatToken.allowance(owner.address, addr2.address);
+            expect(addr2Allowance).to.equal(60);
+        });
+        it("Should decrease Allowance of address 2", async function () {
+            const initialOwnerBalance: BigNumber = await hardhatToken.balanceOf(owner.address);
+
+            // Approve 50 tokens from owner to addr2.
+            await hardhatToken.approve(addr2.address, 40);
+
+            // Check balances.
+            const addr2Allowance = await hardhatToken.allowance(owner.address, addr2.address);
+            expect(addr2Allowance).to.equal(40);
+        });
+        it("Allowance Should remain same of address 2", async function () {
+            const initialOwnerBalance: BigNumber = await hardhatToken.balanceOf(owner.address);
+
+            // Approve 50 tokens from owner to addr2.
+            await hardhatToken.approve(addr2.address, 40);
+
+            // Check balances.
+            const addr2Allowance = await hardhatToken.allowance(owner.address, addr2.address);
+            expect(addr2Allowance).to.equal(40);
+        });
     });
 });
 
