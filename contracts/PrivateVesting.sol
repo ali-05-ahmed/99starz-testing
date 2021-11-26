@@ -1094,6 +1094,12 @@ contract PrivateVesting is Ownable, ReentrancyGuard,Whitelist{
         _token.safeTransfer(beneficiaryPayable, amount);
     }
 
+    function getVestedAmount(bytes32 vestingScheduleId) public view returns(uint256){
+        VestingSchedule storage vestingSchedule = vestingSchedules[vestingScheduleId];
+        uint256 vestedAmount = _computeReleasableAmount(vestingSchedule);
+        return vestedAmount;
+    }
+
     /**
     * @dev Returns the number of vesting schedules managed by this contract.
     * @return the number of vesting schedules

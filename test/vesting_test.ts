@@ -110,7 +110,6 @@ describe("Vesting", function () {
                 await contract.revoke(ID)
                 let revoked = await contract.checkRevoked(ID)
                 expect(revoked).to.equal(true);
-                await console.log("waited for 10 seconds")
             });
             it("Should release vested Token", async function () {
                 await hardhatToken.transfer(contract.address, 1000);
@@ -120,9 +119,12 @@ describe("Vesting", function () {
                 await contract.createVestingSchedule(owner.address, true, 50);
                 let ID = await contract.computeByteIdForAddress(owner.address)
                 await new Promise(resolve => setTimeout(resolve, 10000)); // 3 sec
-                await contract.release(ID, 1)
+                await console.log("waited for 10 seconds")
                 let amount = await contract.getWithdrawableAmount();
-                console.log(amount.toNumber())
+                await console.log("Withdrawable amount", amount.toNumber())
+                amount = await contract.getVestedAmount(ID)
+                await console.log("Vested amount", amount.toNumber())
+                await contract.release(ID, 0)
             });
 
         });
