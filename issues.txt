@@ -1,0 +1,12 @@
+1.all the smart contracts are in one file
+2.solidity compiler version is imported 7-8 times in a single file
+3.safeMath libarary is not requid in solidity 0.8
+
+4.variables in constructor are not used properly :
+        require(duration != 0,"Time duration must be greater than 0" );
+        require(slicePeriodSeconds != 0,"Interval must be greater than 0" );
+ 
+ corrected:
+	require(_duration != 0,"Time duration must be greater than 0" ); //changed
+        require(_slicePeriodSeconds != 0,"Interval must be greater than 0" );
+	
